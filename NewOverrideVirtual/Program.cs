@@ -1,57 +1,62 @@
 ﻿#region inheritance
 MyBaseClass myClass = new MyClass();
 Console.Write("Senario 1: ");
-MyMethod();
+myClass.MyMethod();
 #endregion
 
 #region inheritance and virtual-override
 MyBaseClass2 myClass2 = new MyClass2();
 Console.Write("Senario 2: ");
-MyMethod2(myClass2);
+myClass2.MyMethod();
 #endregion
 
 #region inheritance and new
+MyBaseClass3 myClass3 = new MyClass3();
 Console.Write("Senario 3: ");
-MyMethod3();
+myClass3.MyMethod();
 #endregion
 
 
-static void MyMethod3()
+class MyClass3 : MyBaseClass3
 {
-    MyClass3.MyMethod();
-}
-
-static void MyMethod2(MyBaseClass2 myClass)
-{
-    myClass.MyMethod();
-}
-
-static void MyMethod()
-{
-    MyBaseClass.MyMethod();
-}
-
-class MyClass3 : MyBaseClass
-{
-    public static new void MyMethod()
+    public new void MyMethod()
     {
-        Console.WriteLine("Class");
+        Console.WriteLine("Class3");
+        base.MyMethod();
     }
+    /*public new int MyMethod()
+    {
+        Console.WriteLine("Class3");
+        return 0;
+    } OK */ 
 }
 
 class MyClass2 : MyBaseClass2
 {
     public override void MyMethod()
     {
-        Console.WriteLine("Class");
+        Console.WriteLine("Class2");
     }
+    /*public override int MyMethod()
+    {
+        Console.WriteLine("Class2");
+        return 0;
+    } ERROR */
 }
 
 class MyClass : MyBaseClass
 {
-    public static void MyMethod()
+    public void MyMethod()
     {
-        Console.WriteLine("Class");
+        Console.WriteLine("Class1");
+    }
+}
+
+class MyBaseClass3
+{
+    public void MyMethod()
+    {
+        Console.WriteLine("BaseClass3");
     }
 }
 
@@ -59,14 +64,14 @@ class MyBaseClass2
 {
     public virtual void MyMethod()
     {
-        Console.WriteLine("BaseClass");
+        Console.WriteLine("BaseClass2");
     }
 }
 
 class MyBaseClass
 {
-    public static void MyMethod()
+    public void MyMethod()
     {
-        Console.WriteLine("BaseClass");
+        Console.WriteLine("BaseClass1");
     }
 }
